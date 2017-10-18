@@ -7,12 +7,21 @@ class App extends Component {
   
   constructor(props) {
     super(props);
-    
+    this.state = {
+      name : ''
+    };
     this.eventClick = this.eventClick.bind(this);
+    this.eventChange = this.eventChange.bind(this);
   }
   
   eventClick(){
-    this.props.setName('kong-dev')
+    //console.log(this.state.name)
+    this.props.setName(this.state.name)
+  }
+  eventChange(e){
+    this.setState({
+      name :e.target.value
+    })
   }
 
   render() {
@@ -20,6 +29,7 @@ class App extends Component {
     return (
       <div >
         <Employee title={this.props.employee.name}/>
+        <input onChange={this.eventChange} name="title"/>
         <button onClick={this.eventClick}>click</button>
       </div>
     );
