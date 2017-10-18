@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
-import './index.css';
+import { createStore, combineReducers,applyMiddleware } from 'redux'
+
 import App from './App';
 
 
@@ -66,11 +66,10 @@ store.dispatch({
 })*/
 
 
-/*
+
 const defaultSalary ={
-    id : 1, salary: 10000
+    salary: 10000
 }
-    
 
 const salaryReducer = (state = defaultSalary, action) => {
     switch (action.type) {
@@ -85,9 +84,8 @@ const salaryReducer = (state = defaultSalary, action) => {
 }
 
 const defaultEmp ={
-    id : 1, name: "employee01", age: 21
+    name: "employee01", age: 21
 }
-    
 
 const employeeReducer = (state = defaultEmp, action) => {
     switch (action.type) {
@@ -103,15 +101,25 @@ const employeeReducer = (state = defaultEmp, action) => {
             return state
     }
 }
-const store = createStore(combineReducers({ salaryReducer, employeeReducer }))
+//const store = createStore(combineReducers({ salaryReducer, employeeReducer }))
+const myLog = (store)=>(next)=>(action)=>{
+    console.log('Log :', action)
+    next(action)
+}
 
+const store = createStore(
+    combineReducers({ salaryReducer, employeeReducer }),
+    {},
+    applyMiddleware(myLog),
+      
+)
 
-console.log(store.getState())
+//console.log(store.getState())
 store.subscribe(() => {
     console.log('Update :', store.getState())
 })
 
-
+/*
 store.dispatch({
     type: 'SETAGE',
     age: 5  
@@ -127,5 +135,5 @@ store.dispatch({
     salary: 555555
 });*/
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

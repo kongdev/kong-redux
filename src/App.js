@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Employee from './Employee'
+import { connect } from 'react-redux'
+
 
 class App extends Component {
+  
+  constructor(props) {
+    super(props);
+    
+    this.eventClick = this.eventClick.bind(this);
+  }
+  
+  eventClick(){
+    this.props.setName('kong-dev')
+  }
+
   render() {
+    //console.log(this.props)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div >
+        <Employee title={this.props.employee.name}/>
+        <button onClick={this.eventClick}>click</button>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+
+  return {
+    employee: state.employeeReducer,
+    salary : state.salaryReducer
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName: (value) => {
+      dispatch({
+        type: 'SETNAME',
+        name: value
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
