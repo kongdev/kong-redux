@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import './index.css';
 import App from './App';
 
 
 
-
+/*
 const reducer = (state = { count: 0 }, action) => {
     switch (action.type) {
         case 'INCREMENT':
@@ -45,9 +45,6 @@ store.dispatch({
     value: 5
 });
 
-
-
-
 store.dispatch({
     type: 'RESET'
 });
@@ -66,8 +63,69 @@ store.dispatch({
 store.dispatch({
     type: 'SET',
     count: 101
+})*/
+
+
+/*
+const defaultSalary ={
+    id : 1, salary: 10000
+}
+    
+
+const salaryReducer = (state = defaultSalary, action) => {
+    switch (action.type) {
+        case 'SETSALARY':
+            return {
+                ...state , salary : action.salary
+            }
+        
+        default:
+            return state
+    }
+}
+
+const defaultEmp ={
+    id : 1, name: "employee01", age: 21
+}
+    
+
+const employeeReducer = (state = defaultEmp, action) => {
+    switch (action.type) {
+        case 'SETNAME':
+        return {
+            ...state , name : action.name
+        }
+    case 'SETAGE':
+        return {
+            ...state , age :action.age
+        }
+        default:
+            return state
+    }
+}
+const store = createStore(combineReducers({ salaryReducer, employeeReducer }))
+
+
+console.log(store.getState())
+store.subscribe(() => {
+    console.log('Update :', store.getState())
 })
 
+
+store.dispatch({
+    type: 'SETAGE',
+    age: 5  
+});
+
+store.dispatch({
+    type: 'SETNAME',
+    name: 'kong-dev'  
+});
+
+store.dispatch({
+    type: 'SETSALARY',
+    salary: 555555
+});*/
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
