@@ -7,7 +7,8 @@ import App from './App';
 
 
 
-const store = createStore((state = { count: 0 }, action) => {
+
+const reducer = (state = { count: 0 }, action) => {
     switch (action.type) {
         case 'INCREMENT':
             const valueInc = typeof action.value === 'number' ? action.value : 1
@@ -31,8 +32,8 @@ const store = createStore((state = { count: 0 }, action) => {
             return state
     }
 
-
-})
+}
+const store = createStore(reducer)
 
 const unsub = store.subscribe(() => {
     console.log(store.getState())
