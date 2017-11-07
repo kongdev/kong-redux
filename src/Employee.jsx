@@ -4,7 +4,8 @@ class Employee extends Component {
     render() {
         return (
             <div>
-                Hi : {this.props.title}
+                <p>Hi : {this.props.title}</p>
+                <p>Salary : {this.props.salary}</p>
             </div>
         );
     }
