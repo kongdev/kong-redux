@@ -109,8 +109,9 @@ const myLog = (store)=>(next)=>(action)=>{
 
 const store = createStore(
     combineReducers({ salaryReducer, employeeReducer }),
-    {},
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(myLog),
+    
       
 )
 
